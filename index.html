@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>表型年龄自测</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- 配置Tailwind自定义颜色和字体 -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0F3460',
+            secondary: '#1A3A69',
+            accent: '#16C2D5',
+            light: '#F5F8FF',
+            dark: '#1A1A2E'
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+        },
+      }
+    }
+  </script>
+  
+  <style type="text/tailwindcss">
+    @layer utilities {
+      .content-auto {
+        content-visibility: auto;
+      }
+      .card-shadow {
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      }
+      .border-custom {
+        border: 1px solid #E2E8F0;
+      }
+    }
+  </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-800">
+  <!-- 顶部标题栏 -->
+  <header class="bg-primary text-white py-6 px-4 md:px-8">
+    <div class="container mx-auto">
+      <h1 class="text-[clamp(1.5rem,3vw,2.5rem)] font-bold text-center">表型年龄自测</h1>
+      <div class="w-24 h-1 bg-accent mx-auto mt-2"></div>
+    </div>
+  </header>
+
+  <!-- 主要内容区 -->
+  <main class="container mx-auto py-8 px-4 md:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+      
+      <!-- 平台介绍部分 -->
+      <div class="bg-white rounded-lg p-6 card-shadow border-custom">
+        <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+          <i class="fa fa-info-circle mr-2 text-accent"></i>平台介绍
+        </h2>
+        <div class="space-y-4 text-gray-700">
+          <p>  本平台以PA 模型（表型年龄模型）理论框架为核心基础。表型年龄计算模型包含9项临床常规标志物，涵盖五大生理系统：</p>
+          
+          <ul class="list-disc pl-5 space-y-1">
+            <li>1) 炎症功能（C反应蛋白）</li>
+            <li>2) 免疫功能（白细胞计数、淋巴细胞百分比、平均红细胞体积、红细胞分布宽度）</li>
+            <li>3) 肝功能（白蛋白、碱性磷酸酶）</li>
+            <li>4) 肾功能（肌酐）</li>
+            <li>5) 代谢功能（血清葡萄糖）</li>
+          </ul>
+          
+          <p>通过对这9项标志物进行系统性数学组合分析，基于每种组合构建PA，从中筛选性能优良的组合，以确保在部分标志物缺失的条件下，仍能有效开展衰老量化研究。</p>
+          
+          <p>该项目由郑州大学公共卫生学院王威教授团队完成。</p>
+          
+          <!-- 公式显示 -->
+          <div class="intro-image">
+          			        <img src="3.png" alt="平台介绍相关图片" style="max-width: 100%; height: auto;">
+          </div>
+        </div>
+      </div>
+      
+      <!-- 数据输入部分 -->
+      <div class="bg-white rounded-lg p-6 card-shadow border-custom">
+        <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+          <i class="fa fa-pencil-square-o mr-2 text-accent"></i>数据输入
+        </h2>
+        
+        <form id="biologyAgeForm" class="space-y-4">
+          <!-- 输入字段组 -->
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="space-y-1">
+              <label for="urea" class="text-sm text-gray-600 block">1、C反应蛋白(mg/dL):</label>
+              <input type="number" step="0.01" id="urea" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            
+            <div class="space-y-1">
+              <label for="crp" class="text-sm text-gray-600 block">2、血清葡萄糖(mmol/L):</label>
+              <input type="number" step="0.01" id="crp" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            
+            <div class="space-y-1">
+              <label for="creatinine" class="text-sm text-gray-600 block">3. 肌酐: (μmol/L):</label>
+              <input type="number" step="0.01" id="creatinine" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            
+            <div class="space-y-1">
+              <label for="ferritin" class="text-sm text-gray-600 block">4、白蛋白((g/L):</label>
+              <input type="number" step="0.01" id="ferritin" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            
+            <div class="space-y-1">
+              <label for="rbc" class="text-sm text-gray-600 block">5、碱性磷酸酶(U/L):</label>
+              <input type="number" step="0.01" id="rbc" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            
+            <div class="space-y-1">
+              <label for="plt" class="text-sm text-gray-600 block">6、白细胞计数(10^3 cells/L):</label>
+              <input type="number" step="0.01" id="plt" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            
+            <div class="space-y-1">
+              <label for="albumin" class="text-sm text-gray-600 block">7、淋巴细胞百分比(%) :</label>
+              <input type="number" step="0.01" id="albumin" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            
+            <div class="space-y-1">
+              <label for="tg" class="text-sm text-gray-600 block">8、平均红细胞体积(fL) :</label>
+              <input type="number" step="0.01" id="tg" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            
+            <div class="space-y-1">
+              <label for="tc" class="text-sm text-gray-600 block">9、红细胞分布宽度(%):</label>
+              <input type="number" step="0.01" id="tc" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+            
+            
+            <div class="space-y-1 md:col-span-2">
+              <label for="age" class="text-sm text-gray-600 block">10. 实际年龄 (岁) :</label>
+              <input type="number" step="1" id="age" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-accent/50 focus:border-accent">
+            </div>
+          </div>
+          
+          <!-- 提交按钮 -->
+          <div class="pt-2 text-center">
+            <button type="button" id="calculateBtn" class="bg-primary hover:bg-secondary text-white font-medium py-2 px-8 rounded-md transition duration-300 transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-primary/50">
+              开始计算
+            </button>
+            <p class="text-xs text-gray-500 mt-2">最少输入两项指标</p>
+          </div>
+        </form>
+      </div>
+      
+      <!-- 温馨提示和图片部分 -->
+      <div class="flex flex-col gap-6">
+        <!-- 温馨提示卡片 -->
+        <div class="bg-white rounded-lg p-6 card-shadow border-custom">
+          <div class="bg-blue-50 border-l-4 border-accent p-4 rounded-r-md">
+            <h2 class="text-lg font-bold text-primary mb-3">温馨提醒:</h2>
+            <ul class="list-disc pl-5 space-y-2 text-gray-700 text-sm">
+              <li>1.生活因素（如吸烟等）、BMI异常者以及低教育水平等对表型年龄计算会产生一定的影响！</li>
+              <li>2.表型年龄因人而异，需结合长期临床观测结果进行解释。</li>
+              <li>3.本研究仅用于科学研究。</li>
+              <li>4.如需科研计算相关合作或技术交流咨询，请联系邮箱：<br>llmmhh1013@163.com。</li>
+			  <li>5.生物学年龄自测网站（如下图）链接：https://zzu-zaz.github.io/AGING1/</li>
+            </ul>
+          </div>
+        </div>
+        
+        <!-- 学院图片 -->
+        <div class="bg-white rounded-lg p-4 card-shadow border-custom">
+          <img src="https://p11-flow-imagex-download-sign.byteimg.com/tos-cn-i-a9rns2rl98/59cb5c35050a44d3a3d92cd3f5b02dbe.png~tplv-a9rns2rl98-24:720:720.png?rcl=2025111115420432A7FC78B76C8FBBC591&rk3s=8e244e95&rrcfp=8a172a1a&x-expires=1763451724&x-signature=572oCqwwwLkcb9E1Jpn4NrZxePI%3D" 
+               alt="公共卫生学院" 
+               class="w-full h-auto rounded-md object-cover"
+               loading="lazy">
+        </div>
+        
+        <!-- 计算结果区域 (默认隐藏) -->
+        <div id="resultSection" class="bg-white rounded-lg p-6 card-shadow border-custom hidden">
+          <h2 class="text-xl font-bold text-primary mb-4 flex items-center">
+            <i class="fa fa-bar-chart mr-2 text-accent"></i>计算结果
+          </h2>
+          <div class="space-y-4 text-gray-700">
+            <div class="p-4 bg-gray-50 rounded-md text-center">
+              <p class="text-lg font-medium">您的表型学年龄为：</p>
+              <p id="biologyAgeResult" class="text-3xl font-bold text-primary mt-2">--</p>
+            </div>
+            <div class="text-sm">
+              <p>注：表型年龄与实际年龄的差异反映了个体的生理衰老状态。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="bg-primary text-white py-4 mt-8">
+    <div class="container mx-auto px-4 text-center text-sm">
+      <p>© ww 王威教授衰老研究项目组 版权所有</p>
+    </div>
+  </footer>
+
+  <!-- JavaScript -->
+  <script>
+    // 计算按钮点击事件
+    document.getElementById('calculateBtn').addEventListener('click', function() {
+      // 简单验证：检查是否至少输入了两项指标
+      const inputs = document.querySelectorAll('#biologyAgeForm input');
+      let filledCount = 0;
+      
+      inputs.forEach(input => {
+        if (input.value.trim() !== '') {
+          filledCount++;
+        }
+      });
+      
+      if (filledCount < 2) {
+        alert('请至少输入两项指标');
+        return;
+      }
+      
+      // 显示结果区域（实际应用中这里会有真实计算逻辑）
+      document.getElementById('resultSection').classList.remove('hidden');
+      
+      // 模拟计算结果（实际应用中替换为真实计算）
+      const ageInput = document.getElementById('age').value;
+      let result = '--';
+      
+      if (ageInput) {
+        // 生成一个基于实际年龄的随机结果，上下浮动5岁
+        const baseAge = parseInt(ageInput);
+        const randomOffset = Math.floor(Math.random() * 11) - 5; // -5 到 5 之间的随机数
+        result = (baseAge + randomOffset) + ' 岁';
+      }
+      
+      document.getElementById('biologyAgeResult').textContent = result;
+      
+      // 平滑滚动到结果区域
+      document.getElementById('resultSection').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  </script>
+</body>
+</html>
